@@ -1,48 +1,48 @@
 
+var Contact = function(name, phone, street, city, state) {
+  this.name = name;
+  this.phone = phone;
+  this.address = {street, city, state};
+}
+
 var contactList = function() {
-  this.book = []
+  this.contacts = [];
 }
 
-var Contact = function(name, phone, address) {
-  this.name = name,
-  this.phone = phone,
-  this.address = address,
-  this.date = Date.now()
+var work = new contactList(); //creates new contactList
+var home = new contactList();
+
+contactList.prototype.add = function(name, phone, street, city, state) {
+  var contact = new Contact(name, phone, street, city, state);
+  var contactId = this.contacts.map((contact)=> contact.id);
+  contact.id = Math.max(contactId) + 1;
+  this.contacts.push(contact);
 }
 
-var friends = new contactList();
+work.add("Brian", "407-555-1234", "101 S Garland Ave", "Orlando", "FL"); //adds a new contact to the work contactList
+work.add("Suzanne", "407-555-5678", "101 S Garland Ave", "Orlando", "FL");
 
-contactList.prototype.add = function(name, phone, address){
-  var contact = new Contact(name, phone, address);
-  this.book.push(contact);
-}
+home.add("Ruth", "201-555-1732", "6756 Giant Oak Lane", "Orlando", "FL"); //adds a new contact to the home contactList
+home.add("Mom", "201-333-3433", "333 Fulton Ave", "Jersey City", "NJ");
 
 contactList.prototype.find = function(name){
-  return this.book.filter((contact) => contact.name.includes(name));
+  return this.contacts.filter((contact) => contact.name.includes(name));
 }
 
+work.find("Brian"); //locates any contact with the name of Brian in the work contactList
 
-friends.add("Ed", "4321", "21 Jump St");
-friends.add("Kristy", "1234", "NJ");
-/*
-  var TIYStudent = function(name, subject) {
-    this.name = name;
-    this.subject = subject;
-    this.repos = [];
-  }
+contactList.prototype.get = function(id) {
+  return this.contacts.filter((contact) => contact.id === (id));
+}
 
-  var Repos = function(name, language, author) {
-    this.name = name;
-    this.language = language;
-    this.author = author;
-  }
+home.get(1); //locates contact with an ID of 1 in the home contactList
+work.get(2); //locates contact with an ID of 2 in the work contactList
 
-  TIYStudent.prototype.addRepo = function(name, language) {
-    var repo = new Repos(name, language, this);
-    this.repos.push(repo);
-  }
+contactList.prototype.remove = function(id) {
+  var retrieveID = this.get(id);
+  this.contacts.splice(retrieveID, 1);
+}
 
-  var bama = new TIYStudent("Brian", "JavaScript");
-
-  bama.addRepo("T Shirt Shop", "JavaScript");
-*/
+// home; //returns an array everyone in the array
+// home.remove(1); //uses the functions to delete that part of the array
+// home; // returns an array of contacts remaining in the array
