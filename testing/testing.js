@@ -74,7 +74,6 @@ TIYStudent.prototype.repoNames = function() {
 }
 
 TIYStudent.prototype.writes = function(language) {
-  var repoList = this.repos.map((repo) => repo.language);
-  return repoList;
+  return this.repos.map((repo) => repo.language).includes(language);
 }
 */
