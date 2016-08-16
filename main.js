@@ -14,7 +14,7 @@ var home = new contactList();
 
 contactList.prototype.add = function(name, phone, street, city, state) {
   var contact = new Contact(name, phone, street, city, state);
-  contact.date = new Date();
+  contact.added = new Date();
   var contactId = this.contacts.map((contact)=> contact.id);
   contact.id = Math.max(contactId) + 1;
   this.contacts.push(contact);
